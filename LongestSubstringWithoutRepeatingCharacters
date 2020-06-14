@@ -4,7 +4,7 @@ class Solution:
         mymap = {}
         left = 0
         for i in range(len(s)):
-            if s[i] not in mymap or mymap[s[i]] < left:
+            if s[i] not in mymap or mymap[s[i]] < left: // The second condition keeps the left divider
                 mymap[s[i]] = i
                 l = max(l, i-left+1)
             else:
