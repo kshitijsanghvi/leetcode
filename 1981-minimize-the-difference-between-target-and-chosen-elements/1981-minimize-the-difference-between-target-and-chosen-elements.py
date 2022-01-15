@@ -1,21 +1,22 @@
 class Solution:
     def minimizeTheDifference(self, mat: List[List[int]], target: int) -> int:
-        @lru_cache(None)
-        def dp(row, ssum):
-            if row == m:
-                return abs(ssum - target)
-            
-            ans = sys.maxsize
-            
-            for num in mat[row]:
-                ans = min(ans,dp(row+1,ssum+num))
-                if ssum + num >= target:
-                    break
-                    
-            return ans
+        m,n = len(mat),len(mat[0])
         
-        m = len(mat)
         for i in range(m):
             mat[i] = sorted(set(mat[i]))
+        
+        @lru_cache(None)
+        def helper(r,s):
+            if r == -1:
+                return abs(target-s)
             
-        return dp(0,0)
+            ans = float('inf')
+            for j in mat[r]:
+                ans = min(ans,helper(r-1,s+j))
+                if s + j >= target:
+                    break
+
+            return ans
+        
+        return helper(m-1,0)
+        
