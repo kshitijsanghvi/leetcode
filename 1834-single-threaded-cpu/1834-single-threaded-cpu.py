@@ -1,31 +1,28 @@
 class Solution:
     def getOrder(self, tasks: List[List[int]]) -> List[int]:
-    
-        
-        h = []
-        
-        i = 0
         n = len(tasks)
-        ans = []
         
         for i in range(n):
             tasks[i].append(i)
+            
         tasks.sort()
+        
+        ct = tasks[0][0]
         i = 0
-        start = tasks[0][0]
+        q = []
+        processed = 0
+        ans = []
         while True:
-            while i < n and tasks[i][0] <= start:
-                heapq.heappush(h,(tasks[i][1],tasks[i][2]))
-                i+= 1
-                
-            if not h:
+            while i < n and tasks[i][0]<= ct:
+                bisect.insort_right(q,[tasks[i][1],tasks[i][2]],lo = processed) 
+                i+=1
+            
+            if len(q) == processed:
                 if i == n:
                     return ans
                 else:
-                    start = tasks[i][0]
+                    ct = tasks[i][0]
                     continue
-                    
-            ct = heapq.heappop(h)
-            ans.append(ct[1])
-            start += ct[0]
-            
+            ans.append(q[processed][1])
+            ct += q[processed][0]
+            processed+=1
