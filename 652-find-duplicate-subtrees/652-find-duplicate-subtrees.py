@@ -7,21 +7,24 @@
 class Solution:
     def findDuplicateSubtrees(self, root: Optional[TreeNode]) -> List[Optional[TreeNode]]:
         d = {}
-        ans = {}
         
         def traverse(node):
             if not node:
-                return ["NULL"]
+                return ['NULL']
             
-            a = tuple([node.val] + ['|'] +  traverse(node.left) + ['|'] + traverse(node.right))
+            b = [node.val] + ['|'] +  traverse(node.left) + ['|'] + traverse(node.right)
+            a = tuple(b)
+            
             if a in d:
-                if d[a] not in ans:
-                    ans[d[a]] = 1
+                d[a][1]+=1
             else:
-                d[a] = node
+                d[a] = [node,1]
                 
-            return list(a)
+            return b
         
         traverse(root)
-        return ans.keys()
+        
+       
+        return [d[i][0] for i in d if d[i][1]>1]
+  
     
