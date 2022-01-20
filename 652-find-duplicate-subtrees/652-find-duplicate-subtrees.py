@@ -13,7 +13,7 @@ class Solution:
             if not node:
                 return ["NULL"]
             
-            a = tuple([node.val] + ['L'] +  traverse(node.left) + ['R'] + traverse(node.right))
+            a = tuple([node.val] + ['|'] +  traverse(node.left) + ['|'] + traverse(node.right))
             if a in d:
                 if d[a] not in ans:
                     ans[d[a]] = 1
