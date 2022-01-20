@@ -10,7 +10,7 @@ class Solution:
         
         def traverse(node):
             if not node:
-                return ['NULL']
+                return []
             
             b = [node.val] + ['|'] +  traverse(node.left) + ['|'] + traverse(node.right)
             a = tuple(b)
@@ -19,9 +19,7 @@ class Solution:
                 d[a][1]+=1
             else:
                 d[a] = [node,1]
-                
             return b
-        
         traverse(root)
         
        
