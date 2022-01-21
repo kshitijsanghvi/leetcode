@@ -21,8 +21,8 @@ class Solution:
         val = [None for i in range(26)]
         count = 0
         
-        for i,v in enumerate(val):
-            if v == None:
+        for i in range(26):
+            if val[i] == None:
                 q = [i]
                 while q:
                     cn = q.pop()
