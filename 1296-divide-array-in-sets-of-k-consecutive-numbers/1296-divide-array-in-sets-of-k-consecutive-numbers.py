@@ -1,28 +1,27 @@
 class Solution:
     def isPossibleDivide(self, nums: List[int], k: int) -> bool:
-        nums.sort()
-        h = []
-        n = len(nums)
-        h = [[nums[0],1]]
+        c = Counter(nums)
+        nums = list(c.keys())
         
-        for i in range(1,n):
-            if h:
-                cl = heapq.heappop(h)
-                if cl[0] + 1== nums[i]:
-                    cl[0]+=1
-                    cl[1]+=1
-
-                    if cl[1] < k:
-                        heapq.heappush(h,cl)
-
-                elif cl[0] == nums[i]:
-                    heapq.heappush(h,cl)
-                    heapq.heappush(h,[nums[i],1])
-
-                else:
-                    return False
+        nums.sort()
+        n = len(nums)
+        
+        i = 0
+        while i <= n-k:
+            if c[nums[i]] != 0:
+                for j in range(nums[i],nums[i]+k):
+                    if j not in c or c[j] == 0:
+                        return False
+                    else:
+                        c[j]-=1
+                
             else:
-                heapq.heappush(h,[nums[i],1])
-        if h:
-            return False
+                i+=1
+        while i < n:
+            if c[nums[i]]!= 0:
+                return False
+            i+=1
+                
         return True
+                    
+        
