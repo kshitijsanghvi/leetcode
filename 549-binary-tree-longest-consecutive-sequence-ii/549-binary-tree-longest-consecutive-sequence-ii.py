@@ -5,11 +5,10 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def __init__(self):
-        self.max_l = float('-inf')
     def longestConsecutive(self, root: Optional[TreeNode]) -> int:
         
         def helper(node):
+            nonlocal max_l
             if not node:
                 return [0,0]
             
@@ -34,8 +33,10 @@ class Solution:
             if node.left and node.right and node.left.val - 1 == node.val == node.right.val + 1:
                 lnr = max(lnr,l[1]+r[0]+1)
                 
-            self.max_l = max(self.max_l,lnr,max(l),max(r))
+            max_l = max(max_l,lnr,max(l),max(r))
             return cans
-            
-        return max(helper(root)+[self.max_l])    
+        
+        
+        max_l = float('-inf')
+        return max(helper(root)+[max_l])    
                 
