@@ -11,7 +11,7 @@ class Solution:
         time = [0 for i in range(n)]
         q = [root]
         while q:
-            cn = q.pop(0)
+            cn = q.pop()
             
             for nn in adj[cn]:
                 
