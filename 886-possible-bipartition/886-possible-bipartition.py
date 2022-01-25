@@ -1,7 +1,6 @@
 class Solution:
     def possibleBipartition(self, n: int, dislikes: List[List[int]]) -> bool:
         d = [sorted(i) for i in dislikes]
-        d.sort()
         
         d1 = {}
         d2 = {}
