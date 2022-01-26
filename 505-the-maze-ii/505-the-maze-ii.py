@@ -6,7 +6,7 @@ class Solution:
         v[start[0],start[1]] = 0
         ans = []
         while q:
-            cx,cy,cd = q.pop()
+            cx,cy,cd = q.pop(0)
             if [cx,cy] == destination:
                 ans.append(cd)
             else:
