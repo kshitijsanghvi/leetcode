@@ -2,15 +2,15 @@ class Solution:
     def shortestDistance(self, maze: List[List[int]], start: List[int], destination: List[int]) -> int:
         m,n = len(maze),len(maze[0])
         v = {}
-        q = [start+[0]]
+        h = []
+        heapq.heappush(h,[0,start[0],start[1]])
         v[start[0],start[1]] = 0
         ans = []
-        while q:
-            cx,cy,cd = q.pop(0)
+        while h:
+            cd,cx,cy = heapq.heappop(h)
             if [cx,cy] == destination:
-                ans.append(cd)
+                return cd
             else:
-                
                 #Go left
                 nx = cx
                 ny = cy
@@ -22,7 +22,8 @@ class Solution:
                 
                 if (nx,ny) not in v or v[nx,ny] > nd:
                     v[nx,ny] = nd
-                    q.append([nx,ny,nd])
+                    heapq.heappush(h,[nd,nx,ny])
+
                 
                 
                     
@@ -37,7 +38,7 @@ class Solution:
                 
                 if (nx,ny) not in v or v[nx,ny] > nd:
                     v[nx,ny] = nd
-                    q.append([nx,ny,nd])
+                    heapq.heappush(h,[nd,nx,ny])
                     
                 #Go Up
                 nx = cx
@@ -50,7 +51,7 @@ class Solution:
                 
                 if (nx,ny) not in v or v[nx,ny] > nd:
                     v[nx,ny] = nd
-                    q.append([nx,ny,nd])
+                    heapq.heappush(h,[nd,nx,ny])
                     
                 #Go down
                 nx = cx
@@ -63,6 +64,6 @@ class Solution:
                 
                 if (nx,ny) not in v or v[nx,ny] > nd:
                     v[nx,ny] = nd
-                    q.append([nx,ny,nd])
+                    heapq.heappush(h,[nd,nx,ny])
                     
         return -1 if len(ans) == 0 else min(ans)
