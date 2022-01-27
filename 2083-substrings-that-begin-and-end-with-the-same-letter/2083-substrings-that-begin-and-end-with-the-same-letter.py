@@ -1,3 +1,11 @@
 class Solution:
     def numberOfSubstrings(self, s: str) -> int:
-        return sum([v*(v+1)//2 for v in Counter(s).values()])
+        c = Counter(s)
+        ans = 0
+        d={}
+        for i in c.values():
+            if i not in d:
+                d[i] = i*(i+1)//2
+            ans+=d[i]
+        
+        return ans
