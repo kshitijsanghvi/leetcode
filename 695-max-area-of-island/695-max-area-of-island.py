@@ -13,7 +13,7 @@ class Solution:
                     q = [[i,j]]
                     cans = 0
                     while q:
-                        cx,cy = q.pop()
+                        cx,cy = q.pop(0)
                         cans +=1
                         
                         l = (cx,cy-1)
