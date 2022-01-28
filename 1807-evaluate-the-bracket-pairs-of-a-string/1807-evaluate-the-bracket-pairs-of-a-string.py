@@ -18,9 +18,7 @@ class Solution:
                     key+=s[j]
                     j+=1
                 
-                value = '?'
-                if key in d:
-                    value = d[key]
+                value = '?' if key not in d else d[key]
                 ans += value
                 i = j +1
         return ans
