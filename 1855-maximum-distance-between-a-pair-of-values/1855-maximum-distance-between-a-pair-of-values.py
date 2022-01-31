@@ -4,33 +4,22 @@ class Solution:
             return 0
         n2 = len(nums2)
         n1 = len(nums1)
-        def bs(s):
 
-            if s > n2 - 1:
-                return s
-            l = s
-            r = n2 - 1
+        i = 0
+        j =0
+        n = min(n1,n2)
+        res = 0
+        while i < n1 and j < n2:
             
-            while l + 1 < r:
-                mid = l + (r- l)//2
-                if nums2[mid] >= nums1[s]:
-                    l = mid
-                else:
-                    r = mid - 1
-                    
-            if nums2[r] >= nums1[s]:
-                return r
-            if nums2[l] >= nums1[s]:
-                return l
-            return s
-        
-        
-        
-        
-        max_d = 0
-        for i in range(min(n1,n2)):
-            idx = bs(i)
-            max_d = max(max_d, idx - i)
+            while j < n2 and nums2[j] >= nums1[i]:
+                j +=1
+
+            if j == n2:
+                if nums2[j-1] >= nums1[i]:
+                    return max(res,j -1 - i)    
+
+            res = max(res,j -1 - i)
+            i += 1
+        return res
             
-            
-        return max_d
+                
