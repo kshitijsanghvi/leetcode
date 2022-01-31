@@ -7,14 +7,14 @@
 class CBTInserter:
 
     def __init__(self, root: Optional[TreeNode]):
-        self.d = {}
+        self.d = []
         self.c = -1
         q = deque()
         q.append(root)
         while q:
             cn = q.popleft()
             self.c+=1
-            self.d[self.c] = cn
+            self.d.append(cn)
             if cn.left:
                 q.append(cn.left)
             if cn.right:
@@ -23,7 +23,7 @@ class CBTInserter:
                 
     def insert(self, val: int) -> int:
         self.c += 1
-        self.d[self.c] =TreeNode(val)
+        self.d.append(TreeNode(val))
         p = (self.c - 1)//2
         if p *2 + 1 == self.c:
             self.d[p].left = self.d[self.c]
