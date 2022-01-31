@@ -3,7 +3,9 @@ class Solution:
         if nums1[-1] > nums2[0]:
             return 0
         n2 = len(nums2)
+        n1 = len(nums1)
         def bs(s):
+
             if s > n2 - 1:
                 return s
             l = s
@@ -26,7 +28,7 @@ class Solution:
         
         
         max_d = 0
-        for i,v in enumerate(nums1):
+        for i in range(min(n1,n2)):
             idx = bs(i)
             max_d = max(max_d, idx - i)
             
