@@ -9,9 +9,10 @@ class CBTInserter:
     def __init__(self, root: Optional[TreeNode]):
         self.d = {}
         self.c = -1
-        q = [root]
+        q = deque()
+        q.append(root)
         while q:
-            cn = q.pop(0)
+            cn = q.popleft()
             self.c+=1
             self.d[self.c] = cn
             if cn.left:
