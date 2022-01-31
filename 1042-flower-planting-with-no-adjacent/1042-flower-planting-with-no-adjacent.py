@@ -14,10 +14,7 @@ class Solution:
             if color[i] == None:
                 color[i] = 1
                 
-                q = deque()
-                for nn in adj[i]:
-                    q.append(nn)
-                
+                q = deque(adj[i])      
                 while q:
                     cn = q.popleft()
                     if color[cn] == None:
