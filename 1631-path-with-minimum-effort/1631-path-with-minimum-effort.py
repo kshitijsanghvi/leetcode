@@ -14,7 +14,7 @@ class Solution:
             v = {}
             v[0,0] = 0
             while q:
-                cd,cx,cy = q.popleft()
+                cd,cx,cy = q.pop()
                 if cx == m-1 and cy == n-1:
                     return True
                 else:
