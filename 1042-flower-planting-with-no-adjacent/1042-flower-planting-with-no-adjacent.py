@@ -23,6 +23,7 @@ class Solution:
                     if color[cn] == None:
                         l = [1,2,3,4]
                         for nn in adj[cn]:
+                            # Trying to remove color again
                             if color[nn] != None and color[nn] in l:
                                 l.remove(color[nn])
                             else:
