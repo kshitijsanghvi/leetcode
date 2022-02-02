@@ -9,7 +9,6 @@ class Solution:
         ans = 0
         p = 0
         n  = len(clips)
-        print(clips)
         i = 0
         prev = 0
         while i < n:
