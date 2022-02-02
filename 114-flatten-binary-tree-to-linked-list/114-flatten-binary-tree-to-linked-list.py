@@ -10,23 +10,18 @@ class Solution:
         Do not return anything, modify root in-place instead.
         """
         
-        def po(node):
+        def flatten(node):
             if not node:
-                return []
-            return [node.val] + po(node.left) + po(node.right)
+                return None
+            
+            temp = node
+            right_tree = node.right
+            node.right = flatten(node.left)
+            node.left = None
+            while node.right!= None:
+                node = node.right
+            
+            node.right = flatten(right_tree)
+            return temp
         
-        
-        
-        ans = po(root)
-        
-        n = len(ans)
-        if n == 0:
-            return None
-        else:
-            root.val = ans[0]
-            root.left = None
-            curr = root
-            for i in range(1,n):
-                curr.right = TreeNode(ans[i])
-                curr = curr.right
-            return root
+        return flatten(root)
