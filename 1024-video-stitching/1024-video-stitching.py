@@ -1,10 +1,10 @@
 class Solution:
     def videoStitching(self, clips: List[List[int]], time: int) -> int:
         d = defaultdict(int)
-        for i in clips:
-            d[i[0]] = max(d[i[0]],i[1])
+#         for i in clips:
+#             d[i[0]] = max(d[i[0]],i[1])
             
-        clips = [[i,v] for i,v in d.items()]
+#         clips = [[i,v] for i,v in d.items()]
         clips.sort()
         ans = 0
         p = 0
