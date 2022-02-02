@@ -6,24 +6,23 @@ class Solution:
             
         clips = [[i,v] for i,v in d.items()]
         clips.sort()
-        
-        dp = {}
-        n = len(clips)
+        ans = 0
+        p = 0
+        n  = len(clips)
         print(clips)
-        def helper(i,s):
-            if i == n:
-                if s >= time:
-                    return 0
-                return float('inf')        
-            
-            if (i,s) not in dp:
+        i = 0
+        prev = 0
+        while i < n:
+            if p >= time:
+                return ans
+            maxi = float('-inf')
+            while i < n and p >= clips[i][0]:
+                maxi = max(maxi,clips[i][1])
+                i+=1
                 
-                if clips[i][0]<= s < clips[i][1]:
-                    dp[i,s] = min(1 + helper(i+1,clips[i][1]),helper(i+1,s))
-                else:
-                    dp[i,s] = helper(i+1,s)
-            # print(i,s,dp[i,s])  
-            return dp[i,s]
-        
-        ans = helper(0,0)
-        return ans if ans != float('inf') else -1
+            if i == prev:
+                return -1
+            prev = i
+            p = maxi
+            ans+=1
+        return -1 if p < time else ans
