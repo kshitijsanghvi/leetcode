@@ -8,8 +8,6 @@ class Solution:
             heapq.heappush(h, [v, i, 0])
 
         count = 1
-        seen = set([])
-        seen.add(1)
         while len(uwl) < n:
             flag = 0
             cn = None
