@@ -1,1 +1,1 @@
-​
+Nice technique
