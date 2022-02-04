@@ -15,8 +15,10 @@ class Solution:
                 return False
             
         def find(n):
+            copy = n
             while parent[n] != n:
                 n = parent[n]
+            parent[copy] = n
             return n
         
         for e in edges:
