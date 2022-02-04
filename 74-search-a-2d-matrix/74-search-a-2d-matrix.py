@@ -10,7 +10,7 @@ class Solution:
             n1 = i - m1*n
             return matrix[m1][n1]
         
-        while l < r:
+        while l  + 1 < r:
             
             mid = l + (r-l)//2
             
@@ -22,6 +22,10 @@ class Solution:
                 r = mid - 1
             else:
                 l = mid + 1
-        return True if l==r and matrix[l//n][l - l//n*n]== target else False
-                
+        
+        if matrix[l//n][l - l//n*n]== target:
+            return True
+        if matrix[r//n][r - r//n*n]== target:
+            return True
+        return False
         
