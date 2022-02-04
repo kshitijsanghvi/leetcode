@@ -13,6 +13,6 @@ class Solution:
                 csum -= nums[l]
                 l +=1
             r+=1
-        return min_length if min_length != float('inf') else 0
+        return min_length if min_length != math.inf else 0
             
             
