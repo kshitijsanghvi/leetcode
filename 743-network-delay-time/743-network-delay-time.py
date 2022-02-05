@@ -8,10 +8,10 @@ class Solution:
         v = [-1 for i in range(n+1)]
         v[0] = 0
         ans = -1
-        q = [[0,k]]
+        q = deque([[0,k]])
         v[k] = 0
         while q:
-            ct,cn = q.pop(0)
+            ct,cn = q.popleft()
             ans = max(ans,ct)
             
             for nn,nt in adj[cn]:
