@@ -1,1 +1,1 @@
-​
+# When not itiialising include diagonal in iterations
