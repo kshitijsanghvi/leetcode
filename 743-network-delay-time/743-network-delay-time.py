@@ -11,13 +11,13 @@ class Solution:
         q = [[0,k]]
         v[k] = 0
         while q:
-            ct,cn = heapq.heappop(q)
+            ct,cn = q.pop()
             ans = max(ans,ct)
             
             for nn,nt in adj[cn]:
                 if v[nn] == -1 or v[nn] > ct+nt:
                     v[nn] = ct + nt
-                    heapq.heappush(q,[ct+nt,nn])
+                    q.append([ct+nt,nn])
             
         return -1 if min(v) == -1 else max(v) 
                         
