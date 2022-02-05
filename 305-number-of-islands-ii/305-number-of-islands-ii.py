@@ -12,20 +12,7 @@ class Solution:
             size[cx,cy] = size[nx,ny] + 1
             del(size[nx,ny])
             
-        def collapse():
-            # s = set()
-            # for (cx,cy) in dp:
-            #     copy_x,copy_y = cx,cy
-            #     while dp[cx,cy]!=(cx,cy):
-            #         (cx,cy) = dp[cx,cy]
-            #     s.add((cx,cy))
-            #     dp[copy_x,copy_y] = (cx,cy)
-            # ans.append(len(s))
-            # count =0 
-            # for (cx,cy) in dp:
-            #     if dp[cx,cy] == (cx,cy):
-            #         count+=1
-            ans.append(len(size))
+            
         for cx,cy in positions:
             dp[cx,cy] = (cx,cy)
             
@@ -39,6 +26,6 @@ class Solution:
                     union(cx,cy,nx,ny)
             if (cx,cy) not in size:
                 size[cx,cy] = 1
-            collapse()
+            ans.append(len(size))
 
         return ans
