@@ -12,7 +12,6 @@ class Solution:
             size[cx,cy] = size[nx,ny] + 1
             del(size[nx,ny])
             
-            
         for cx,cy in positions:
             dp[cx,cy] = (cx,cy)
             
