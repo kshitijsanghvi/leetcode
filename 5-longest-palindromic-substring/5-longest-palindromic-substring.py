@@ -16,3 +16,5 @@ class Solution:
                             l =ii
                             r =j+1
         return s[l:r]
+    
+    # When not itiialising include diagonal in iterations
