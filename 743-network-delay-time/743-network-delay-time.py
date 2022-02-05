@@ -11,7 +11,7 @@ class Solution:
         q = [[0,k]]
         v[k] = 0
         while q:
-            ct,cn = q.pop()
+            ct,cn = q.pop(0)
             ans = max(ans,ct)
             
             for nn,nt in adj[cn]:
