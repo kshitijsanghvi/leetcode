@@ -11,11 +11,9 @@ class Solution:
         max_l = float('-inf')
         while r < n:
             if s[r] in d:
-                while s[r] in d:
-                    del(d[s[l]])
-                    l+=1
+                l = max(l,d[s[r]]+1)
             
-            d[s[r]] = 1
+            d[s[r]] = r
             max_l = max(max_l, r - l + 1)
 
             r += 1
