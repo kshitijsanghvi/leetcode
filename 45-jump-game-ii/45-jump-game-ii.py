@@ -2,12 +2,7 @@ class Solution:
     def jump(self, nums: List[int]) -> int:
         
         n = len(nums)
-        @lru_cache(None)
-        def helper(i):
-            if i >= n-1:
-                return 0
-            
-
-            return 1 + min([float('inf')] + [helper(i+j) for j in range(1,nums[i]+1)])
-            
-        return helper(0)
+        dp = [0 for i in range(n)]
+        for i in range(n-2,-1,-1):
+            dp[i] = 1 + min([float('inf')]+[dp[i+j] for j in range(1,min(n,nums[i]+1) ) if i + j < n])
+        return dp[0]
