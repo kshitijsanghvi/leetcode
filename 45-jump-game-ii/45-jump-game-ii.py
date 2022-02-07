@@ -2,7 +2,14 @@ class Solution:
     def jump(self, nums: List[int]) -> int:
         
         n = len(nums)
-        dp = [0 for i in range(n)]
-        for i in range(n-2,-1,-1):
-            dp[i] = 1 + min([float('inf')]+[dp[i+j] for j in range(1,min(n,nums[i]+1) ) if i + j < n])
-        return dp[0]
+        if n == 1:
+            return 0
+        next_jump = 0
+        current_jump = 0
+        ans = 0
+        for i in range(n):
+            if current_jump < i:
+                ans+=1
+                current_jump = next_jump
+            next_jump = max(next_jump,i + nums[i])
+        return ans
