@@ -1,37 +1,30 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        '''
-        0 -> 1 <- 2
-          <-
-        '''
-
-        adj = [[] for i in range(numCourses)]
-        for a, b in prerequisites:
+        v = [0 for i in range(numCourses)]
+        adj = defaultdict(list)
+        
+        for a,b in prerequisites:
             if a == b:
                 return False
             adj[b].append(a)
-
-        
-        v = [0 for i in range(numCourses)]
-
-        def dfs(cn,adj,v):
+            
+            
+        def ts(cn):
             for nn in adj[cn]:
                 if v[nn] == 1:
-                    return False
-                elif v[nn]==0:
+                    return True
+                elif v[nn] == 0:
                     v[nn] = 1
-                    res = dfs(nn,adj,v)
-                    if not res:
-                        return False
+                    if ts(nn):
+                        return True
             v[cn] = 2
-            return True
-
-        for r in range(numCourses):
-            if v[r]==0:
-                v[r] = 1
-                res = dfs(r,adj,v)
-                if not res:
+            
+                
+        for i in range(numCourses):
+            if v[i] == 0:
+                v[i] = 1
+                if ts(i):
                     return False
-                v[r] = 2
-
-        return True 
+                v[i] = 2
+                
+        return True
