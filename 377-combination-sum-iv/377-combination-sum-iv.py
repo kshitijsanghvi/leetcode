@@ -1,18 +1,10 @@
 class Solution:
     def combinationSum4(self, nums: List[int], target: int) -> int:
         
-        dp = {}
-        n = len(nums)
-        def helper(target):
-            if target < 0:
-                return 0
-            if target == 0:
-                return 1
-            
-            if target not in dp:
-                
-                dp[target] = sum([helper(target-i) for i in nums])
-                
-            return dp[target]
+        dp = [1] + [0 for i in range(target)]
         
-        return helper(target)
+        for i in range(target+1):
+            for n in nums:
+                if n + i <= target:
+                    dp[n + i] += dp[i]
+        return dp[-1]
