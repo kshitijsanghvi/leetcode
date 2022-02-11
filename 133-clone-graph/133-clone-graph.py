@@ -18,7 +18,7 @@ class Solution:
         clone.val = node.val
         v_copy[clone.val] = clone
         while q:
-            cn = q.pop(0)
+            cn = q.pop()
             # print(cn.val)    
             for nn in cn.neighbors:
                 if nn.val not in v:
