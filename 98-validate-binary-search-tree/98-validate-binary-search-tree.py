@@ -5,24 +5,9 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        ans = []
-        
-        def check_sorted(a):
-            prev = -math.inf
-            for i in a:
-                if i > prev:
-                    prev = i
-                else:
-                    return False
+    def isValidBST(self, root: Optional[TreeNode],min=float('-inf'),max = float('inf')) -> bool:
+        if not root:
             return True
         
-        def inorder(root):
-            if not root:
-                return []
-            return inorder(root.left) + [root.val] + inorder(root.right)
-        
-        return check_sorted(inorder(root))
-                
-            
-            
+        if min < root.val < max:
+            return self.isValidBST(root.left,min,root.val) and self.isValidBST(root.right,root.val,max)
