@@ -1,17 +1,21 @@
 class Solution:
     def countSubstrings(self, s: str) -> int:
         dp = {}
-        
+        ans = 0        
         def helper(i,j):
-            if i==j:
-                return True
-            if i > j:
-                return True
-            
+            nonlocal ans
             if (i,j) not in dp:
+                if i==j:
+                    ans+=1
+                    dp[i,j] = True
+                    return True
+                if i > j:
+                    dp[i,j] = True
+                    return True
+            
                 if s[i] == s[j] and helper(i+1,j-1):
                     dp[i,j] = True
-                    
+                    ans+=1
                 else:
                     dp[i,j] = False
                     
@@ -21,9 +25,4 @@ class Solution:
             return dp[i,j]
                             
         helper(0,len(s)-1)
-        ans = 0
-        for i in dp:
-            if dp[i] == True:
-                ans+=1
-                
-        return ans + len(s)
+        return ans 
