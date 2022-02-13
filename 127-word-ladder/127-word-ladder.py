@@ -18,7 +18,7 @@ class Solution:
         while q:
             cw,cd = q.pop(0)
             if cw == endWord:
-                ans.append(cd)
+                return cd
                 
             else:
                 for i in range(nw):
