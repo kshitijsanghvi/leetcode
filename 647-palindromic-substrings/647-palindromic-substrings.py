@@ -1,28 +1,22 @@
 class Solution:
     def countSubstrings(self, s: str) -> int:
-        dp = {}
-        ans = 0        
-        def helper(i,j):
-            nonlocal ans
-            if (i,j) not in dp:
-                if i==j:
+        n = len(s)
+        dp = [[False if j > i else True for j in range(n)] for i in range(n)]
+        
+        
+        for i in range(n-1,-1,-1):
+            for j in range(n-1,i,-1):
+                if i != j:
+                    if s[i] == s[j]:
+                        dp[i][j] = dp[i+1][j-1]
+        
+        ans = 0
+        for i in range(n):
+            for j in range(i,n):
+                if dp[i][j]:
                     ans+=1
-                    dp[i,j] = True
-                    return True
-                if i > j:
-                    dp[i,j] = True
-                    return True
-            
-                if s[i] == s[j] and helper(i+1,j-1):
-                    dp[i,j] = True
-                    ans+=1
-                else:
-                    dp[i,j] = False
+        return ans
+                
                     
-                helper(i,j-1)
-                helper(i+1,j)
-            
-            return dp[i,j]
-                            
-        helper(0,len(s)-1)
-        return ans 
+        # Recurrence Relation dp[i,j] = True if dp[i+1,j-1] else False
+        
