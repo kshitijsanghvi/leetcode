@@ -1,1 +1,1 @@
-​
+BFS make a new queue and then mark all elements visited after putting them in the new queue to get all strings
