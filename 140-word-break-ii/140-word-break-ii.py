@@ -1,25 +1,13 @@
 
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
-
-        d = Counter(wordDict)
-        dp = {}
+        d = set(wordDict)
         n = len(s)
-
-        def helper(i):
-            if i == n:
-                return ["", ]
-            # base case
-
-            if i not in dp:
-                sol = []
-
-                for j in range(i + 1, n + 1):
-                    if s[i:j] in d:
-                        temp = helper(j)
-                        for suf in temp:
-                            sol.append(s[i:j] + (' ' + suf if suf !="" else ""))
-                dp[i] = sol
-            return dp[i]
-
-        return helper(0)
+        dp = [[] for i in range(n)] + [[""]]
+        
+        for i in range(n-1,-1,-1):
+            for j in range(i+1,n+1):
+                if s[i:j] in d:
+                    for l in dp[j]:
+                        dp[i].append(s[i:j]+(' '+l if l != "" else ""))
+        return dp[0]
