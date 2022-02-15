@@ -1,30 +1,41 @@
 class Solution:
     def minSumOfLengths(self, arr, target):
+        '''
+        Note: all numbers are positive.
+        
+        Strategy: Keep a track of minimum length as seen before the starting index of the current subarray with the sum is equal to target
+        
+        Then a candidate answer becomes: current length + the smallest seen before
+        Variable names:
+        l : start of new window
+        r : end of new window
+        Length of window = r - l + 1
+        
+        We need to keep the previous min at each index in memory because overlap is not allowed
+        '''
+        
         n = len(arr)
-
-        dp = [float('inf') for _ in range(n + 1)]
-
         r = 0
         l = 0
-        s = 0
+        current_subarray_sum = 0
         ans = float('inf')
+        # Size is n + 1 to deal with initial condition
+        dp = [float('inf') for i in range(n+1)]
+        
         while r < n:
-            s = s +  arr[r]
-            if s < target:
-                dp[r + 1] = dp[r]
-                r += 1
-
-            else:
-
-                while s >= target and l <= r:
-                    if s == target:
-                        ans = min(ans, dp[l] + r - l + 1)
-                        dp[r + 1] = min(dp[r],r - l + 1)
-
-                    else:
-                        dp[r+1] = dp[r]
-                    s -= arr[l]
-                    l += 1
-                r += 1
-
-        return -1 if ans == float('inf') else ans
+            current_subarray_sum += arr[r]
+            
+            if current_subarray_sum >= target:
+                while current_subarray_sum >= target:
+                    if current_subarray_sum == target:
+                        current_subarray_length = r - l + 1
+                        previous_minimum_subarray_length = dp[l]
+                        ans = min(ans, current_subarray_length + previous_minimum_subarray_length)
+                        dp[r+1] = min(previous_minimum_subarray_length,current_subarray_length)
+                    dp[l+1] = min(dp[l+1],dp[l])
+                    current_subarray_sum -= arr[l]
+                    l+=1
+            r+=1
+        return ans if ans != float('inf') else -1
+        
+        
