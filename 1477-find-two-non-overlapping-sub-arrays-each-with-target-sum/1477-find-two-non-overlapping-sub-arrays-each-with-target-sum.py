@@ -31,6 +31,7 @@ class Solution:
                         current_subarray_length = r - l + 1
                         previous_minimum_subarray_length = dp[l]
                         ans = min(ans, current_subarray_length + previous_minimum_subarray_length)
+                        #Updating dp[r] as overlapping solutions are not allowed and it only becomes available when l crosses r
                         dp[r+1] = min(previous_minimum_subarray_length,current_subarray_length)
                     dp[l+1] = min(dp[l+1],dp[l])
                     current_subarray_sum -= arr[l]
