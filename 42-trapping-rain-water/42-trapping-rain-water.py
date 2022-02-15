@@ -1,28 +1,18 @@
 class Solution:
     def trap(self, height: List[int]) -> int:
-        
-        dpr = {}
-        dpl = {}
         n = len(height)
-        def helperl(i):
-            if i == -1:
-                return float('-inf')
-            if i not in dpl:
-                dpl[i] = helperl(i-1) if height[i] < helperl(i-1) else height[i]
-            return dpl[i]
-                
+        left_max = [0 for _ in range(n)]
+        right_max = [0 for _ in range(n)]
         
-        def helperr(i):
-            if i == n:
-                return float('-inf')
-            if i not in dpr:
-                dpr[i] = helperr(i+1) if height[i] < helperr(i+1) else height[i]
-            return dpr[i]
+        for i in range(1,n):
+            left_max[i] = max(left_max[i-1],height[i-1])
+            
         
-        helperl(n-1)
-        helperr(0)
-        
-        water = 0
+        for i in range(n-2,-1,-1):
+            right_max[i] = max(right_max[i+1],height[i+1])
+            
         for i in range(n):
-            water += min(dpl[i],dpr[i]) - height[i]
-        return water
+            left_max[i] = min(left_max[i],right_max[i]) - height[i]
+            if left_max[i] < 0:
+                left_max[i] = 0
+        return sum(left_max)
