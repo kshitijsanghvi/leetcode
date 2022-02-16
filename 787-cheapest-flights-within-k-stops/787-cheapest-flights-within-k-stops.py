@@ -19,4 +19,4 @@ class Solution:
                         if nn not in v or v[nn][0] > cprice + nprice or v[nn][1] > nstops:
                             v[nn] = [cprice + nprice,nstops]
                             heapq.heappush(h,[cprice + nprice, nn, nstops])
-        return -1 if not ans else min(ans)
+        return -1
