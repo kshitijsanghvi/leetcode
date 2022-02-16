@@ -1,21 +1,37 @@
 class Solution:
     def findCircleNum(self, isConnected: List[List[int]]) -> int:
         """
-        Appr
+        Approach 1: Disjoint set
+
         """
-        n = len(isConnected)
-        visited = [None for i in range(n)]
         
-        ans = 0
+        
+        def find(cn):
+            cp = cn
+            while parent[cn]!= cn:
+                cn = parent[cn]
+            parent[cp] = cn
+            return cn
+        
+        def union(node1, node2):
+            find1 = find(node1)
+            find2 = find(node2)
+            parent[find2] = find1
+            parent[node1] = find1
+            parent[node2] = find1
+            
+        
+        n = len(isConnected)
+        parent = [i for i in range(n)]
+        
         for i in range(n):
-            if visited[i] == None:
-                ans+=1
-                visited[i] = 1
-                q = [i]
-                while q:
-                    cn = q.pop(0)
-                    for nn,v in enumerate(isConnected[cn]):
-                        if v == 1 and visited[nn] == None:
-                            visited[nn] = 1
-                            q.append(nn)
-        return ans
+            for j in range(n):
+                if isConnected[i][j] == 1:
+                    if find(i)!=find(j):
+                        union(i,j)
+                        
+        count = 0
+        for i in range(n):
+            if parent[i] == i:
+                count+=1
+        return count
