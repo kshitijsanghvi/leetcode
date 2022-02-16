@@ -11,7 +11,7 @@ class Solution:
         while h:
             cprice, cn, cstops = heapq.heappop(h)
             if cn == dst:
-                 ans.append(cprice)
+                 return cprice
             else:
                 nstops = cstops + 1
                 if nstops <= k + 1:
