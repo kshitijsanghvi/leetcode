@@ -3,13 +3,11 @@ class Solution:
         def compute_distance(p1,p2):
             return abs(p1[0]-p2[0]) + abs(p1[1]-p2[1])
         d = defaultdict(list)
-        max_d = 0
         min_d = 2*10**3 -1
         for i,w in enumerate(workers):
             for j,b in enumerate(bikes):
                 dist = compute_distance(w,b)
                 min_d = min(min_d, dist)
-                max_d = max(max_d, dist)
                 d[dist].append([i,j])
         nw = len(workers)
         nb = len(bikes)
