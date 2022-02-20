@@ -1,1 +1,2 @@
-​
+1. As we cannot use extra space the most straightforward approach is reusing available space
+2. The underpinning of the same is that we need to extract the information from the reusing memory space first before overwriting the space
