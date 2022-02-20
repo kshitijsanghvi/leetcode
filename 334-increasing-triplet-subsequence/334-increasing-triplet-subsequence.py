@@ -13,7 +13,4 @@ class Solution:
             if min_a[i] < nums[i] < max_a[i]:
                 return True
             
-        for i,v in enumerate(nums):
-            if min_a[i] < v < max_a[i]:
-                return True
         return False
