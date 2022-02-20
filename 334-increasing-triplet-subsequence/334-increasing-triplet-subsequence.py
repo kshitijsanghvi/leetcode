@@ -10,6 +10,8 @@ class Solution:
         
         for i in range(n-2,-1,-1):
             max_a[i] = max(max_a[i+1],nums[i+1])
+            if min_a[i] < nums[i] < max_a[i]:
+                return True
             
         for i,v in enumerate(nums):
             if min_a[i] < v < max_a[i]:
