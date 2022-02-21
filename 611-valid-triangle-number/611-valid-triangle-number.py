@@ -9,11 +9,15 @@ class Solution:
         n = len(nums)
         ans = 0
         for i in range(n-2):
-            for l in range(i+1,n-1):
-                max_v = nums[i] + nums[l] - 1
-                right = bisect.bisect_right(nums,max_v,lo=l+1)
-                ans+= right - 1 - l 
-          
-        return ans
-                    
+            l = i + 1
+            r = l + 1
+            while l < n-1:
+                while r < n and nums[i] + nums[l] > nums[r]:
+                    ans+= r - l
+                    r +=1
+                l +=1
+                if l == r:
+                    r = l + 1
                 
+                    
+        return ans
