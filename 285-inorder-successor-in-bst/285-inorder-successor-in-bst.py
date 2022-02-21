@@ -17,20 +17,13 @@ class Solution:
             return ans
         else:
             temp = root
-            stack = []
+            prev = None
             while temp.val != p.val:
                 if temp.val > p.val:
-                    stack.append(["left",temp])
+                    prev = temp
                     temp = temp.left
                 else:
-                    stack.append(['right',temp])
                     temp = temp.right
-            if not stack:
+            if not prev:
                 return None
-            while stack and stack[-1][0]!='left':
-                stack.pop()
-            if stack:
-                return stack[-1][1]
-            else:
-                return None
-            
+            return prev
