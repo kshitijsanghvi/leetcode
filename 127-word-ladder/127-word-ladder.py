@@ -1,30 +1,39 @@
 class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
-        adj = defaultdict(list)
-        nw = len(wordList[0])
-        if endWord not in wordList:
+        if beginWord == endWord:
+            return 1
+        
+        flag = False
+        
+        d = defaultdict(list)
+        nw = len(beginWord)
+        for idx,w in enumerate(wordList):
+            if w == endWord:
+                flag = True
+            for i in range(nw):
+                d[w[:i] + '*' + w[i+1:]].append(idx)
+        
+        if flag:
+            v = {}
+            q = []
+            for i in range(nw):
+                for j in d[beginWord[:i] + '*' + beginWord[i+1:]]:
+                    if j not in v:
+                        v[j] = 1
+                        q.append([j,2])
+            while q:
+                cn,cd = q.pop(0)
+                if wordList[cn] == endWord:
+                    return cd
+                else:
+                    cw = wordList[cn]
+                    for i in range(nw):
+                        for nn in d[cw[:i] + '*' + cw[i+1:]]:
+                            if nn not in v:
+                                v[nn] = 1
+                                q.append([nn,cd+1])
+                    
+
             return 0
         
-        for w in wordList:
-            for i in range(nw):
-                temp = w[:i] + '*' + w[i+1:]
-                adj[temp].append(w)
-                
-        v = {}
-        start = beginWord
-        v[start] = 1
-        q = [[start,1]]
-        ans = []
-        while q:
-            cw,cd = q.pop(0)
-            if cw == endWord:
-                return cd
-                
-            else:
-                for i in range(nw):
-                    for nn in adj[cw[:i]+'*'+cw[i+1:]]:
-                        if nn not in v:
-                            v[nn] = 1
-                            q.append([nn,cd+1])
-        return min(ans) if ans else 0
-            
+        return 0
