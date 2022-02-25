@@ -9,14 +9,17 @@ class Solution:
                 left[i] = 0
             else:
                 left[i] = left[i-1]+1
-        right = [math.inf for i in range(n)]
         if seats[-1] == 1:
-            right[-1] = 0
+            left[-1] = 0
+        prev = left[-1]
         for i in range(n-2,-1,-1):
             if seats[i] == 1:
-                right[i] = 0
+                left[i] = 0
+                prev = 0
             else:
-                right[i] = 1 + right[i+1]
+                prev+=1
+                left[i] = min(prev,left[i])
+                
         # print(left)
         # print(right)
-        return max([min(i[0],i[1]) for i in zip(left,right)])
+        return max(left)
