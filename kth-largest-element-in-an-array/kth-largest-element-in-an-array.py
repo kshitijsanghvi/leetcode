@@ -8,8 +8,7 @@ class Solution:
             i+=1
             
         while i < len(nums):
-            heapq.heappush(h,nums[i])
-            heapq.heappop(h)
+            heapq.heappushpop(h,nums[i])
             i+=1
             
         return h[0]
