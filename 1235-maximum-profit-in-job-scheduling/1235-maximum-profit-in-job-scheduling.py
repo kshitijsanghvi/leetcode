@@ -17,7 +17,7 @@ class Solution:
 #         return helper(0)
 
         for i in range(n-1,-1,-1):
-            dp[i] = max(profit[startTime[i][1]] + dp[bisect.bisect_left(startTime, [endTime[startTime[i][1]],],lo = i + 1)], dp[i+1])
+            dp[i] = max(profit[startTime[i][1]] + dp[bisect.bisect_left(startTime, [endTime[startTime[i][1]],])], dp[i+1])
         
         return dp[0]
 
