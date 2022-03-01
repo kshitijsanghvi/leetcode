@@ -10,15 +10,11 @@ class Solution:
         l = 1
         while l < n and nums[l] >= nums[l-1]:
             l +=1
-            
         if l == n:
             return 0
-        
         r = n - 2
-        
         while r >= 0 and nums[r] <= nums[r+1]:
             r -= 1
-
         l = l - 1
         r = r + 1
         ans = min(r,n - l - 1)
