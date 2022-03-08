@@ -1,0 +1,1 @@
+Greedy approach to make the smallest number possible
