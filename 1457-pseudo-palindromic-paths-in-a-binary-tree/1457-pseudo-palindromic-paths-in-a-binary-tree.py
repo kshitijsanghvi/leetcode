@@ -23,26 +23,23 @@ class Solution:
         
         """
         ans = 0
-        def helper(node,d):
+        def helper(node,val):
             nonlocal ans
             if not node:
                 return 
             
-            if node.val in d:
-                d[node.val]+=1
-            else:
-                d[node.val] = 1
-
+            d = 1 << node.val
+            val = val ^ d
+            
             if node.left:
-                helper(node.left, dict(d))
+                helper(node.left, val)
             if node.right:
-                helper(node.right, dict(d))
+                helper(node.right, val)
+            if node.left == node.right == None:
+                # Check if all 0
+                if val == 0 or val & (val - 1) == 0:
+                    ans +=1
             
-            if node.left == node.right == None:        
-                count_off = sum([1 for i in d if d[i]%2 == 1])
-                ans += 1 if count_off <= 1 else 0
-
             
-            
-        helper(root,dict())
+        helper(root,0)
         return ans
