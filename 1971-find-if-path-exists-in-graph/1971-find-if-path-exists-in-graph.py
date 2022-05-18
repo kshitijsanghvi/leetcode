@@ -1,34 +1,32 @@
 class Solution:
     def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
-        adj_list = defaultdict(list)
+        adj_list = collections.defaultdict(list)
         
         for u,v in edges:
             adj_list[u].append(v)
             adj_list[v].append(u)
         
-        distance = {}
-        parent = {}
-        color = defaultdict(int)
+        parent = [None] * n
+        start = [None] * n
+        finish = [None] * n
+        color = [0] * n
+        time = 0
         
-        q = deque()
-        distance[source] = 0
-        parent[source] = None
-        color[source] = 1
-        q.append(source)
-        
-        while q:
-            current_node = q.popleft()
+        def dfs_visit(current_node):
+            nonlocal time    
+            color[current_node] = 1
+            time += 1
+            start[current_node] = time
+            
             for next_node in adj_list[current_node]:
                 if color[next_node] == 0:
-                    color[next_node] = 1
-                    parent[next_node] = current_node
-                    distance[next_node] = distance[current_node] + 1
-                    q.append(next_node)
-            color[current_node] =2
-        
-        if color[destination] == 2:
-            return True
-        return False
-        
-        
-        
+                    parent[next_node] = current_node 
+                    dfs_visit(next_node)
+            
+            time += 1
+            finish[current_node] = time
+            color[current_node] = 2
+            
+        dfs_visit(source)
+        return color[destination] == 2
+                    
