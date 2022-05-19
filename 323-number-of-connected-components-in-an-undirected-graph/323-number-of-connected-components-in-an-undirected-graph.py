@@ -20,9 +20,17 @@ class Solution:
                         q.append(nn)
                 color[cn] = 2
         ans = 0
+        
+        def dfs(cn):
+            color[cn] = 1
+            for nn in adj[cn]:
+                if color[nn] == 0:
+                    dfs(nn)
+            color[cn] = 2
+        
         for i in range(n):
             if color[i] == 0:
                 ans += 1
-                bfs(i)
+                dfs(i)
                 
         return ans
