@@ -11,6 +11,7 @@ class Solution:
                 temp = helper(pile_index + 1, k)
                 sum = 0
                 for i in range(1,min(k,len(piles[pile_index]))+1):
+                    # No need to comopute prefix sum as it is overwork
                     sum += piles[pile_index][i-1]
                     temp = max(temp,sum + helper(pile_index+1,k-i))
                 dp[pile_index,k] = temp
