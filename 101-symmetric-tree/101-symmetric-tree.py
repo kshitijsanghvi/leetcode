@@ -7,15 +7,39 @@
 class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
         
-        def helper(node1,node2):
-            if not node1 or not node2:
-                if node1 == node2 == None:
-                    return True
-                return False
-            
-            if node1.val != node2.val:
-                return False
-            
-            return helper(node1.left,node2.right) and helper(node1.right,node2.left)
+        q = deque()
+        q.append(root)
         
-        return helper(root.left,root.right)
+        def sysm(q):
+            l = 0 
+            r = len(q) - 1
+            while l < r:
+                
+                if not q[l] or not q[r]:
+                    if q[l] != q[r]:
+                        return False
+                
+                elif q[l] and q[r]:
+                    if q[l].val != q[r].val:
+                        return False
+                
+                l += 1
+                r -= 1
+
+            return True
+        
+        while q:
+            temp_q = deque()
+            
+            for i in q:
+                temp_q.append(i.left)
+                temp_q.append(i.right)
+            
+            if not sysm(temp_q):
+                return False
+            
+            q = [i for i in temp_q if i != None]
+        
+        return True
+        
+        
