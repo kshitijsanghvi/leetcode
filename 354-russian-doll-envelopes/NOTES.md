@@ -1,1 +1,1 @@
-​
+Very nice trick to reverse sort height so we dont consider two enevelopes of equal width. We will never append only bs and insert.
